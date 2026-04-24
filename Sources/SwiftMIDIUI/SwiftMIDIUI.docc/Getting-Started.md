@@ -2,7 +2,7 @@
 
 A quick guide on getting started using SwiftMIDIUI.
 
-![swift-midi-core](swift-midi-ui-banner.png)
+![swift-midi-ui](swift-midi-ui-banner.png)
 
 ## 1. Import the Library
 
