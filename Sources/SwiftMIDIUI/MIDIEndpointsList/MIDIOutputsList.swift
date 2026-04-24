@@ -11,7 +11,7 @@ import SwiftUI
 
 /// SwiftUI `List` view for selecting MIDI output endpoints.
 ///
-/// This view requires that an <doc://SwiftMIDIUI/SwiftMIDIIO/ObservableMIDIManager> instance exists in the environment.
+/// This view requires that a **swift-midi-io** `ObservableMIDIManager` instance exists in the environment.
 ///
 /// ```swift
 /// MIDIOutputsList( ... )
