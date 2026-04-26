@@ -1,6 +1,6 @@
 //
 //  MIDIEndpointsSelectable.swift
-//  swift-midi • https://github.com/orchetect/swift-midi
+//  SwiftMIDI UI • https://github.com/orchetect/swift-midi-ui
 //  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
@@ -13,12 +13,12 @@ import SwiftUI
 @available(macOS 14.0, iOS 17.0, *)
 public protocol MIDIEndpointsSelectable where Self: View, Endpoint.ID == MIDIIdentifier {
     associatedtype Endpoint: MIDIEndpoint & Hashable & Identifiable
-    
+
     var endpoints: [Endpoint] { get set }
     var maskedFilter: MIDIEndpointMaskedFilter? { get set }
     var selectionID: MIDIIdentifier? { get set }
     var selectionDisplayName: String? { get set }
-    
+
     var ids: [MIDIIdentifier] { get set }
 }
 
@@ -29,7 +29,7 @@ extension MIDIEndpointsSelectable {
         if selectionID == .invalidMIDIIdentifier {
             return (id: nil, displayName: nil)
         }
-        
+
         if let selectionID,
            let selectionDisplayName,
            let found = endpoints.first(
@@ -39,10 +39,10 @@ extension MIDIEndpointsSelectable {
         {
             return (id: found.uniqueID, displayName: found.displayName)
         }
-        
+
         return nil
     }
-    
+
     func generateIDs(
         endpoints: [Endpoint],
         maskedFilter: MIDIEndpointMaskedFilter?,
@@ -57,14 +57,14 @@ extension MIDIEndpointsSelectable {
             endpointIDs = endpoints
                 .map(\.id)
         }
-        
+
         if let selectionID, !endpointIDs.contains(selectionID) {
             return [selectionID] + endpointIDs
         } else {
             return endpointIDs
         }
     }
-    
+
     func endpoint(for id: MIDIIdentifier) -> Endpoint? {
         endpoints.first(whereUniqueID: id)
     }

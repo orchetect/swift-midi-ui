@@ -1,6 +1,6 @@
 //
 //  MIDIEndpointsPicker.swift
-//  swift-midi • https://github.com/orchetect/swift-midi
+//  SwiftMIDI UI • https://github.com/orchetect/swift-midi-ui
 //  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
@@ -11,21 +11,20 @@ import SwiftUI
 
 /// Internal generic MIDI endpoints SwiftUI picker view that can be specialized for either inputs or outputs.
 @available(macOS 14.0, iOS 17.0, *)
-struct MIDIEndpointsPicker<Endpoint>: View, MIDIEndpointsSelectable
-    where Endpoint: MIDIEndpoint & Hashable & Identifiable,
-    Endpoint.ID == MIDIIdentifier
+struct MIDIEndpointsPicker<Endpoint: MIDIEndpoint & Hashable & Identifiable>: View, MIDIEndpointsSelectable
+    where Endpoint.ID == MIDIIdentifier
 {
     private weak var midiManager: ObservableMIDIManager?
-    
+
     let title: String
     var endpoints: [Endpoint]
     var maskedFilter: MIDIEndpointMaskedFilter?
     @Binding var selectionID: MIDIIdentifier?
     @Binding var selectionDisplayName: String?
     var showIcons: Bool
-    
+
     @State var ids: [MIDIIdentifier] = []
-    
+
     init(
         title: String,
         endpoints: [Endpoint],
@@ -42,16 +41,16 @@ struct MIDIEndpointsPicker<Endpoint>: View, MIDIEndpointsSelectable
         _selectionDisplayName = selectionDisplayName
         self.showIcons = showIcons
         self.midiManager = midiManager
-        
+
         // pre-populate IDs
         _ids = State(initialValue: generateIDs(endpoints: endpoints, maskedFilter: maskedFilter, midiManager: midiManager))
     }
-    
-    public var body: some View {
+
+    var body: some View {
         Picker(title, selection: $selectionID) {
             Text("None")
                 .tag(MIDIIdentifier?.none)
-            
+
             ForEach(ids, id: \.self) {
                 EndpointRow(
                     endpoint: endpoint(for: $0),
@@ -83,22 +82,22 @@ struct MIDIEndpointsPicker<Endpoint>: View, MIDIEndpointsSelectable
             }
         }
     }
-    
+
     private func updateID(endpoints: [Endpoint]) {
         guard let updatedDetails = updatedID(endpoints: endpoints) else {
             return
         }
-        
+
         selectionDisplayName = updatedDetails.displayName
         // update ID in case it changed
         if selectionID != updatedDetails.id { selectionID = updatedDetails.id }
     }
-    
+
     private struct EndpointRow: View {
         let endpoint: Endpoint?
         @Binding var selectionDisplayName: String?
         let showIcon: Bool
-        
+
         var body: some View {
             if showIcon {
                 HStack {
@@ -119,7 +118,7 @@ struct MIDIEndpointsPicker<Endpoint>: View, MIDIEndpointsSelectable
                 text
             }
         }
-        
+
         @ViewBuilder
         private var text: some View {
             if let endpoint {
@@ -129,20 +128,20 @@ struct MIDIEndpointsPicker<Endpoint>: View, MIDIEndpointsSelectable
                     .foregroundColor(.secondary)
             }
         }
-        
+
         private var missingText: String {
             showIcon
                 ? selectionDisplayName ?? "Missing"
                 : (selectionDisplayName ?? "") + " (Missing)"
         }
-        
+
         @ViewBuilder
         private func image(resampled: Bool) -> some View {
             if let endpoint {
                 let img = resampled
                     ? endpoint.image(resizedTo: .init(width: 16, height: 16)).value
                     : endpoint.image.value
-                
+
                 if let img {
                     img
                 } else {

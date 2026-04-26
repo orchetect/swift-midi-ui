@@ -1,6 +1,6 @@
 //
 //  UI Utilities.swift
-//  swift-midi • https://github.com/orchetect/swift-midi
+//  SwiftMIDI UI • https://github.com/orchetect/swift-midi-ui
 //  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
@@ -14,7 +14,7 @@ extension NSImage {
     @_disfavoredOverload
     func resized(to newSize: CGSize) -> NSImage {
         let img = NSImage(size: newSize)
-        
+
         img.lockFocus()
         let ctx = NSGraphicsContext.current
         ctx?.imageInterpolation = .high
@@ -22,7 +22,7 @@ extension NSImage {
         let toRect = CGRect(origin: .zero, size: newSize)
         draw(in: toRect, from: fromRect, operation: .copy, fraction: 1)
         img.unlockFocus()
-        
+
         return img
     }
 }
@@ -39,7 +39,7 @@ extension UIImage {
         let image = UIGraphicsImageRenderer(size: newSize).image { _ in
             draw(in: CGRect(origin: .zero, size: newSize))
         }
-        
+
         return image.withRenderingMode(renderingMode)
     }
 }

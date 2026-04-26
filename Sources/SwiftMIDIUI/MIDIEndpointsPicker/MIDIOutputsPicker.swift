@@ -1,6 +1,6 @@
 //
 //  MIDIOutputsPicker.swift
-//  swift-midi • https://github.com/orchetect/swift-midi
+//  SwiftMIDI UI • https://github.com/orchetect/swift-midi-ui
 //  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
@@ -27,15 +27,15 @@ import SwiftUI
 @available(macOS 14.0, iOS 17.0, *)
 public struct MIDIOutputsPicker: View, _MIDIOutputsSelectable {
     @Environment(ObservableMIDIManager.self) private var midiManager
-    
+
     private var title: String
     @Binding private var selectionID: MIDIIdentifier?
     @Binding private var selectionDisplayName: String?
     private var showIcons: Bool
     private var hideOwned: Bool
-    
+
     var updatingInputConnectionWithTag: String?
-    
+
     public init(
         title: String,
         selectionID: Binding<MIDIIdentifier?>,
@@ -49,7 +49,7 @@ public struct MIDIOutputsPicker: View, _MIDIOutputsSelectable {
         self.showIcons = showIcons
         self.hideOwned = hideOwned
     }
-    
+
     public var body: some View {
         MIDIEndpointsPicker<MIDIOutputEndpoint>(
             title: title,
@@ -67,11 +67,11 @@ public struct MIDIOutputsPicker: View, _MIDIOutputsSelectable {
             updateInputConnection(id: newValue)
         }
     }
-    
+
     private var maskedFilter: MIDIEndpointMaskedFilter? {
         hideOwned ? .drop(.owned()) : nil
     }
-    
+
     private func updateInputConnection(id: MIDIIdentifier?) {
         updateInputConnection(
             selectedUniqueID: id,

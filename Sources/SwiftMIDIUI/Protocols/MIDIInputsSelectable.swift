@@ -1,6 +1,6 @@
 //
 //  MIDIInputsSelectable.swift
-//  swift-midi • https://github.com/orchetect/swift-midi
+//  SwiftMIDI UI • https://github.com/orchetect/swift-midi-ui
 //  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
@@ -27,7 +27,7 @@ extension _MIDIInputsSelectable {
         copy.updatingOutputConnectionWithTag = tag
         return copy
     }
-    
+
     func updateOutputConnection(
         selectedUniqueID: MIDIIdentifier?,
         selectedDisplayName: String?,
@@ -36,7 +36,7 @@ extension _MIDIInputsSelectable {
         guard let tag = updatingOutputConnectionWithTag,
               let midiOutputConnection = midiManager.managedOutputConnections[tag]
         else { return }
-        
+
         guard let selectedUniqueID,
               let selectedDisplayName,
               selectedUniqueID != .invalidMIDIIdentifier
@@ -44,9 +44,10 @@ extension _MIDIInputsSelectable {
             midiOutputConnection.removeAllInputs()
             return
         }
-        
+
         let criterium: MIDIEndpointIdentity = .uniqueIDWithFallback(
-            id: selectedUniqueID, fallbackDisplayName: selectedDisplayName
+            id: selectedUniqueID,
+            fallbackDisplayName: selectedDisplayName
         )
         if midiOutputConnection.inputsCriteria != [criterium] {
             midiOutputConnection.removeAllInputs()
