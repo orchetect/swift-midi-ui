@@ -60,9 +60,14 @@ public struct MIDIInputsPicker: View, _MIDIInputsSelectable {
             maskedFilter: maskedFilter,
             selectionID: $selectionID,
             selectionDisplayName: $selectionDisplayName,
-            showIcons: showIcons
+            showIcons: showIcons,
+            midiManager: midiManager
         )
-        .task {
+        .onAppear { // get initial system state
+            guard let midiManager else { return }
+            self.endpoints = midiManager.endpoints.inputs
+        }
+        .task { // update on changes to system state
             guard let midiManager else { return }
             for await endpoints in midiManager.endpointsStream() {
                 updateEndpoints(with: endpoints.inputs)

@@ -33,7 +33,8 @@ struct MIDIEndpointsPicker<Endpoint: MIDIEndpoint & Hashable & Identifiable>: Vi
         maskedFilter: MIDIEndpointMaskedFilter?,
         selectionID: Binding<MIDIIdentifier?>,
         selectionDisplayName: Binding<String?>,
-        showIcons: Bool
+        showIcons: Bool,
+        midiManager: MIDIManager? // must supply this here since we can't access environment from the init
     ) {
         self.title = title
         self.endpoints = endpoints
