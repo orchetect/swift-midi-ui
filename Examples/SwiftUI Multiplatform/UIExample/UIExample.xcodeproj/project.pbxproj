@@ -3,16 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E22A75322FA49EB7006CAB3F /* SwiftMIDIUI in Frameworks */ = {isa = PBXBuildFile; productRef = E22A75312FA49EB7006CAB3F /* SwiftMIDIUI */; };
 		E24932F42F07BB9D006CB1D1 /* EmptyDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24932F32F07BB9D006CB1D1 /* EmptyDetailsView.swift */; };
 		E24932F62F07BFB1006CB1D1 /* DetailsInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E24932F52F07BFB1006CB1D1 /* DetailsInfoView.swift */; };
-		E2B36D732F98717B0043F93D /* SwiftMIDIIO in Frameworks */ = {isa = PBXBuildFile; productRef = E2B36D722F98717B0043F93D /* SwiftMIDIIO */; };
 		E2B8BD9E29B308D600B92BDF /* ListsExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B8BD9D29B308D600B92BDF /* ListsExampleView.swift */; };
 		E2B8BDA429B30B3200B92BDF /* PickersExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B8BDA329B30B3200B92BDF /* PickersExampleView.swift */; };
-		E2D931B92F972A7400EC2618 /* SwiftMIDIUI in Frameworks */ = {isa = PBXBuildFile; productRef = E2D931B82F972A7400EC2618 /* SwiftMIDIUI */; };
 		E2F1FE7429B2DF5800054467 /* UIExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1FE7329B2DF5800054467 /* UIExampleApp.swift */; };
 		E2F1FE7629B2DF5800054467 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2F1FE7529B2DF5800054467 /* ContentView.swift */; };
 		E2F1FE7829B2DF5A00054467 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2F1FE7729B2DF5A00054467 /* Assets.xcassets */; };
@@ -41,8 +40,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2D931B92F972A7400EC2618 /* SwiftMIDIUI in Frameworks */,
-				E2B36D732F98717B0043F93D /* SwiftMIDIIO in Frameworks */,
+				E22A75322FA49EB7006CAB3F /* SwiftMIDIUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,8 +99,7 @@
 			);
 			name = UIExample;
 			packageProductDependencies = (
-				E2D931B82F972A7400EC2618 /* SwiftMIDIUI */,
-				E2B36D722F98717B0043F93D /* SwiftMIDIIO */,
+				E22A75312FA49EB7006CAB3F /* SwiftMIDIUI */,
 			);
 			productName = UIExample;
 			productReference = E2F1FE7029B2DF5800054467 /* UIExample.app */;
@@ -133,8 +130,7 @@
 			);
 			mainGroup = E2F1FE6729B2DF5800054467;
 			packageReferences = (
-				E2EB53E02F9728EB007ECC00 /* XCRemoteSwiftPackageReference "swift-midi-ui" */,
-				E2B36D712F98717B0043F93D /* XCRemoteSwiftPackageReference "swift-midi-io" */,
+				E22A75302FA49EB7006CAB3F /* XCLocalSwiftPackageReference "../../../" */,
 			);
 			productRefGroup = E2F1FE7129B2DF5800054467 /* Products */;
 			projectDirPath = "";
@@ -399,34 +395,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		E2B36D712F98717B0043F93D /* XCRemoteSwiftPackageReference "swift-midi-io" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/orchetect/swift-midi-io";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		E22A75302FA49EB7006CAB3F /* XCLocalSwiftPackageReference "../../../" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../";
 		};
-		E2EB53E02F9728EB007ECC00 /* XCRemoteSwiftPackageReference "swift-midi-ui" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/orchetect/swift-midi-ui";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E2B36D722F98717B0043F93D /* SwiftMIDIIO */ = {
+		E22A75312FA49EB7006CAB3F /* SwiftMIDIUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E2B36D712F98717B0043F93D /* XCRemoteSwiftPackageReference "swift-midi-io" */;
-			productName = SwiftMIDIIO;
-		};
-		E2D931B82F972A7400EC2618 /* SwiftMIDIUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E2EB53E02F9728EB007ECC00 /* XCRemoteSwiftPackageReference "swift-midi-ui" */;
 			productName = SwiftMIDIUI;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -3,14 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		E21299092851D8D600957FE8 /* MIDIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E21299082851D8D600957FE8 /* MIDIHelper.swift */; };
-		E22A743A2FA4945D006CAB3F /* SwiftMIDIIO in Frameworks */ = {isa = PBXBuildFile; productRef = E22A74392FA4945D006CAB3F /* SwiftMIDIIO */; };
-		E22A743D2FA49548006CAB3F /* SwiftMIDIIO in Frameworks */ = {isa = PBXBuildFile; productRef = E22A743C2FA49548006CAB3F /* SwiftMIDIIO */; };
-		E24861472F97222A008ECA8C /* SwiftMIDIUI in Frameworks */ = {isa = PBXBuildFile; productRef = E24861462F97222A008ECA8C /* SwiftMIDIUI */; };
+		E22A752F2FA49E88006CAB3F /* SwiftMIDIUI in Frameworks */ = {isa = PBXBuildFile; productRef = E22A752E2FA49E88006CAB3F /* SwiftMIDIUI */; };
 		E2496A922989087F003FD165 /* ContentView-iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2496A8B2989087F003FD165 /* ContentView-iOS.swift */; };
 		E27C5DC42A034B3100189B15 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27C5DC32A034B3100189B15 /* Utilities.swift */; };
 		E27D0E63284F3FB600F43247 /* EndpointPickersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E27D0E62284F3FB600F43247 /* EndpointPickersApp.swift */; };
@@ -37,9 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E24861472F97222A008ECA8C /* SwiftMIDIUI in Frameworks */,
-				E22A743D2FA49548006CAB3F /* SwiftMIDIIO in Frameworks */,
-				E22A743A2FA4945D006CAB3F /* SwiftMIDIIO in Frameworks */,
+				E22A752F2FA49E88006CAB3F /* SwiftMIDIUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,9 +108,7 @@
 			);
 			name = EndpointPickers;
 			packageProductDependencies = (
-				E24861462F97222A008ECA8C /* SwiftMIDIUI */,
-				E22A74392FA4945D006CAB3F /* SwiftMIDIIO */,
-				E22A743C2FA49548006CAB3F /* SwiftMIDIIO */,
+				E22A752E2FA49E88006CAB3F /* SwiftMIDIUI */,
 			);
 			productName = EndpointPickers;
 			productReference = E27D0E5F284F3FB600F43247 /* EndpointPickers.app */;
@@ -145,8 +139,7 @@
 			);
 			mainGroup = E27D0E56284F3FB600F43247;
 			packageReferences = (
-				E24861452F97222A008ECA8C /* XCRemoteSwiftPackageReference "swift-midi-ui" */,
-				E22A743B2FA49548006CAB3F /* XCRemoteSwiftPackageReference "swift-midi-io" */,
+				E22A752D2FA49E88006CAB3F /* XCLocalSwiftPackageReference "../../../" */,
 			);
 			productRefGroup = E27D0E60284F3FB600F43247 /* Products */;
 			projectDirPath = "";
@@ -409,38 +402,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		E22A743B2FA49548006CAB3F /* XCRemoteSwiftPackageReference "swift-midi-io" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/orchetect/swift-midi-io";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		E22A752D2FA49E88006CAB3F /* XCLocalSwiftPackageReference "../../../" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../";
 		};
-		E24861452F97222A008ECA8C /* XCRemoteSwiftPackageReference "swift-midi-ui" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/orchetect/swift-midi-ui";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E22A74392FA4945D006CAB3F /* SwiftMIDIIO */ = {
+		E22A752E2FA49E88006CAB3F /* SwiftMIDIUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = SwiftMIDIIO;
-		};
-		E22A743C2FA49548006CAB3F /* SwiftMIDIIO */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E22A743B2FA49548006CAB3F /* XCRemoteSwiftPackageReference "swift-midi-io" */;
-			productName = SwiftMIDIIO;
-		};
-		E24861462F97222A008ECA8C /* SwiftMIDIUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E24861452F97222A008ECA8C /* XCRemoteSwiftPackageReference "swift-midi-ui" */;
 			productName = SwiftMIDIUI;
 		};
 /* End XCSwiftPackageProductDependency section */
