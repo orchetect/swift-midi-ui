@@ -36,6 +36,8 @@ public struct MIDIOutputsList: View, _MIDIOutputsSelectable {
 
     var updatingInputConnectionWithTag: String?
 
+    @State private var endpoints: [MIDIOutputEndpoint] = []
+    
     public init(
         selectionID: Binding<MIDIIdentifier?>,
         selectionDisplayName: Binding<String?>,
@@ -50,14 +52,17 @@ public struct MIDIOutputsList: View, _MIDIOutputsSelectable {
 
     public var body: some View {
         MIDIEndpointsList<MIDIOutputEndpoint>(
-            endpoints: midiManager.endpoints.outputs,
+            endpoints: endpoints,
             maskedFilter: maskedFilter,
             selectionID: $selectionID,
             selectionDisplayName: $selectionDisplayName,
             showIcons: showIcons
         )
-        .onAppear {
-            updateInputConnection(id: selectionID)
+        .task {
+            guard let midiManager else { return }
+            for await endpoints in midiManager.endpointsStream() {
+                updateEndpoints(with: endpoints.outputs)
+            }
         }
         .onChange(of: selectionID) { newValue in
             updateInputConnection(id: newValue)
@@ -66,6 +71,11 @@ public struct MIDIOutputsList: View, _MIDIOutputsSelectable {
 
     private var maskedFilter: MIDIEndpointMaskedFilter? {
         hideOwned ? .drop(.owned()) : nil
+    }
+    
+    private func updateEndpoints(with newEndpoints: [MIDIOutputEndpoint]) {
+        guard endpoints != newEndpoints else { return }
+        endpoints = newEndpoints
     }
 
     private func updateInputConnection(id: MIDIIdentifier?) {
