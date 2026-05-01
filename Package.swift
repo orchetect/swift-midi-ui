@@ -19,7 +19,7 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/orchetect/swift-midi-core", from: "1.0.0"),
-        .package(url: "https://github.com/orchetect/swift-midi-io", from: "1.0.0")
+        .package(url: "https://github.com/orchetect/swift-midi-io", branch: "concurrency") // from: "1.0.0")
     ],
     targets: [
         .target(
