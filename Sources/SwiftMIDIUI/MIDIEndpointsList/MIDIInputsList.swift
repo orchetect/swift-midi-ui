@@ -11,23 +11,23 @@ import SwiftUI
 
 /// SwiftUI `List` view for selecting MIDI input endpoints.
 ///
-/// This view requires that a **swift-midi-io** `ObservableMIDIManager` instance exists in the environment.
+/// This view requires that a **swift-midi-io** `MIDIManager` instance exists in the environment.
 ///
 /// ```swift
 /// MIDIInputsList( ... )
-///     .environment(midiManager)
+///     .environment(\.midiManager, midiManager)
 /// ```
 ///
 /// Optionally supply a tag to auto-update an output connection in MIDIManager.
 ///
 /// ```swift
 /// MIDIInputsList( ... )
-///     .environment(midiManager)
+///     .environment(\.midiManager, midiManager)
 ///     .updatingOutputConnection(withTag: "MyConnection")
 /// ```
 @available(macOS 14.0, iOS 17.0, *)
 public struct MIDIInputsList: View, _MIDIInputsSelectable {
-    @Environment(ObservableMIDIManager.self) private var midiManager
+    @Environment(\.midiManager) private var midiManager
 
     @Binding private var selectionID: MIDIIdentifier?
     @Binding private var selectionDisplayName: String?
@@ -54,8 +54,7 @@ public struct MIDIInputsList: View, _MIDIInputsSelectable {
             maskedFilter: maskedFilter,
             selectionID: $selectionID,
             selectionDisplayName: $selectionDisplayName,
-            showIcons: showIcons,
-            midiManager: midiManager
+            showIcons: showIcons
         )
         .onAppear {
             updateOutputConnection(id: selectionID)
@@ -70,6 +69,7 @@ public struct MIDIInputsList: View, _MIDIInputsSelectable {
     }
 
     private func updateOutputConnection(id: MIDIIdentifier?) {
+        guard let midiManager else { return }
         updateOutputConnection(
             selectedUniqueID: id,
             selectedDisplayName: selectionDisplayName,

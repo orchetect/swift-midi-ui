@@ -10,11 +10,13 @@ import SwiftMIDIIO
 import SwiftUI
 
 /// Internal generic MIDI endpoints SwiftUI picker view that can be specialized for either inputs or outputs.
+///
+/// This view requires that a **swift-midi-io** `MIDIManager` instance exists in the environment.
 @available(macOS 14.0, iOS 17.0, *)
 struct MIDIEndpointsPicker<Endpoint: MIDIEndpoint & Hashable & Identifiable>: View, MIDIEndpointsSelectable
     where Endpoint.ID == MIDIIdentifier
 {
-    private weak var midiManager: ObservableMIDIManager?
+    @Environment(\.midiManager) private var midiManager
 
     let title: String
     var endpoints: [Endpoint]
@@ -31,8 +33,7 @@ struct MIDIEndpointsPicker<Endpoint: MIDIEndpoint & Hashable & Identifiable>: Vi
         maskedFilter: MIDIEndpointMaskedFilter?,
         selectionID: Binding<MIDIIdentifier?>,
         selectionDisplayName: Binding<String?>,
-        showIcons: Bool,
-        midiManager: ObservableMIDIManager?
+        showIcons: Bool
     ) {
         self.title = title
         self.endpoints = endpoints
@@ -40,7 +41,6 @@ struct MIDIEndpointsPicker<Endpoint: MIDIEndpoint & Hashable & Identifiable>: Vi
         _selectionID = selectionID
         _selectionDisplayName = selectionDisplayName
         self.showIcons = showIcons
-        self.midiManager = midiManager
 
         // pre-populate IDs
         _ids = State(initialValue: generateIDs(endpoints: endpoints, maskedFilter: maskedFilter, midiManager: midiManager))

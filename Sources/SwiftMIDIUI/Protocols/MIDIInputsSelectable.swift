@@ -31,7 +31,7 @@ extension _MIDIInputsSelectable {
     func updateOutputConnection(
         selectedUniqueID: MIDIIdentifier?,
         selectedDisplayName: String?,
-        midiManager: ObservableMIDIManager
+        midiManager: MIDIManager
     ) {
         guard let tag = updatingOutputConnectionWithTag,
               let midiOutputConnection = midiManager.managedOutputConnections[tag]

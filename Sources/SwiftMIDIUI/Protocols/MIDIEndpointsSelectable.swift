@@ -46,7 +46,7 @@ extension MIDIEndpointsSelectable {
     func generateIDs(
         endpoints: [Endpoint],
         maskedFilter: MIDIEndpointMaskedFilter?,
-        midiManager: ObservableMIDIManager?
+        midiManager: MIDIManager?
     ) -> [MIDIIdentifier] {
         var endpointIDs: [MIDIIdentifier] = []
         if let maskedFilter, let midiManager {
