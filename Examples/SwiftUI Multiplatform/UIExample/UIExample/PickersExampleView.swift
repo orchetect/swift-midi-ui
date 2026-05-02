@@ -50,6 +50,7 @@ struct PickersExampleView: View {
         .frame(maxWidth: 400)
 
         Text("Inputs and Outputs pickers allowing for a single selection or 'None'.")
+            .multilineTextAlignment(.center)
     }
 
     @ViewBuilder

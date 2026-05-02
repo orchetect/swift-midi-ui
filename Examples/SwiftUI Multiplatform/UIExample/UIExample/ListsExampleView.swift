@@ -33,6 +33,7 @@ struct ListsExampleView: View {
         .frame(width: 200)
 
         Text("Inputs and Outputs lists allowing for a single selection or no selection.")
+            .multilineTextAlignment(.center)
     }
 
     @ViewBuilder
