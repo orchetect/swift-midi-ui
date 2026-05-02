@@ -70,4 +70,26 @@ extension MIDIEndpointsSelectable {
     }
 }
 
+// MARK: - _MIDIEndpointsSelectable
+
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+protocol _MIDIEndpointsSelectable: MIDIEndpointsSelectable {
+    var midiManager: MIDIManager? { get }
+}
+
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+extension _MIDIEndpointsSelectable {
+    /// Emits an error to the console if `MIDIManager` is missing from the SwiftUI environment.
+    /// This method is called from `onAppear { }` in all SwiftMIDIUI views that require the `MIDIManager`.
+    func checkForMIDIManager() {
+        if midiManager != nil { return }
+        
+        print("""
+            MIDIManager instance is missing from the SwiftUI environment. \
+            It must be assigned to the midiManager environment value in order for endpoint lists and pickers to update.
+            """
+        )
+    }
+}
+
 #endif

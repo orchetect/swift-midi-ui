@@ -13,10 +13,10 @@ import SwiftUI
 ///
 /// This view requires that a **swift-midi-io** `MIDIManager` instance exists in the environment.
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
-struct MIDIEndpointsPicker<Endpoint: MIDIEndpoint & Hashable & Identifiable>: View, MIDIEndpointsSelectable
+struct MIDIEndpointsPicker<Endpoint: MIDIEndpoint & Hashable & Identifiable>: View, _MIDIEndpointsSelectable
     where Endpoint.ID == MIDIIdentifier
 {
-    @Environment(\.midiManager) private var midiManager
+    @Environment(\.midiManager) var midiManager
 
     let title: String
     var endpoints: [Endpoint]
@@ -62,6 +62,7 @@ struct MIDIEndpointsPicker<Endpoint: MIDIEndpoint & Hashable & Identifiable>: Vi
             }
         }
         .onAppear {
+            checkForMIDIManager()
             updateID(endpoints: endpoints)
             ids = generateIDs(endpoints: endpoints, maskedFilter: maskedFilter, midiManager: midiManager)
         }
