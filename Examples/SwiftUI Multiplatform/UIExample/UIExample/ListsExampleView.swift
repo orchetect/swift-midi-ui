@@ -1,6 +1,6 @@
 //
 //  ListsExampleView.swift
-//  SwiftMIDI Examples • https://github.com/orchetect/swift-midi-examples
+//  SwiftMIDI UI • https://github.com/orchetect/swift-midi-ui
 //  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
@@ -109,7 +109,7 @@ struct ListsExampleView: View {
         // note: supply a non-nil tag to auto-update an input connection in MIDIManager
         .updatingInputConnection(withTag: nil)
         // the list view requires injecting the observable MIDI manager into the environment
-        .environment(\.midiManager,midiHelper.midiManager)
+        .environment(\.midiManager, midiHelper.midiManager)
 
         #if os(macOS)
         .listStyle(.bordered(alternatesRowBackgrounds: true))

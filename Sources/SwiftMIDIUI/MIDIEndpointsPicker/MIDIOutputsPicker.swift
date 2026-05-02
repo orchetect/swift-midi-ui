@@ -65,7 +65,7 @@ public struct MIDIOutputsPicker: View, _MIDIOutputsSelectable {
         )
         .onAppear { // get initial system state
             guard let midiManager else { return }
-            self.endpoints = midiManager.endpoints.outputs
+            endpoints = midiManager.endpoints.outputs
         }
         .task { // update on changes to system state
             guard let midiManager else { return }
@@ -81,7 +81,7 @@ public struct MIDIOutputsPicker: View, _MIDIOutputsSelectable {
     private var maskedFilter: MIDIEndpointMaskedFilter? {
         hideOwned ? .drop(.owned()) : nil
     }
-    
+
     private func updateEndpoints(with newEndpoints: [MIDIOutputEndpoint]) {
         guard endpoints != newEndpoints else { return }
         endpoints = newEndpoints

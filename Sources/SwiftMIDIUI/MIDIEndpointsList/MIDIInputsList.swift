@@ -61,7 +61,7 @@ public struct MIDIInputsList: View, _MIDIInputsSelectable {
         )
         .onAppear { // get initial system state
             guard let midiManager else { return }
-            self.endpoints = midiManager.endpoints.inputs
+            endpoints = midiManager.endpoints.inputs
         }
         .task { // update on changes to system state
             guard let midiManager else { return }

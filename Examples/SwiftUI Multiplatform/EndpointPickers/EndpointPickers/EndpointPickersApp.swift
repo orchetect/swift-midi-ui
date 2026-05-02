@@ -1,6 +1,6 @@
 //
 //  EndpointPickersApp.swift
-//  SwiftMIDI Examples • https://github.com/orchetect/swift-midi-examples
+//  SwiftMIDI UI • https://github.com/orchetect/swift-midi-ui
 //  © 2026 Steffan Andrews • Licensed under MIT License
 //
 
@@ -27,7 +27,7 @@ struct EndpointPickersApp: App {
         }
         .environment(midiHelper)
     }
-    
+
     /// Provide the MIDI connections with persistently-stored endpoint information in order to reconnect them on initial view load.
     /// The endpoints don't need to exist in the system at the time of adding them to the connections.
     /// The MIDI Manager will automatically reconnect to the endpoints when the endpoints reappear in the system.
