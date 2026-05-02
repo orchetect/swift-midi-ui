@@ -11,6 +11,13 @@ import SwiftUI
 
 /// Protocol adopted by SwiftMIDIUI SwiftUI views that allow the user to select MIDI output endpoints.
 public protocol MIDIOutputsSelectable {
+    /// Automatically updates the MIDI input connection with the given tag (if it exists) in the `MIDIManager` in response
+    /// to endpoint selection changes in a MIDI endpoint list or picker.
+    ///
+    /// In order for this to occur, the `MIDIManager` instance must be injected into the ``SwiftUICore/EnvironmentValues/midiManager``
+    /// environment value. If it is not, then this view modifier has no effect and is the same as not using the view modifier.
+    ///
+    /// Supplying a `nil` tag simply bypasses the action and is the same as not using the view modifier.
     func updatingInputConnection(withTag tag: String?) -> Self
 }
 

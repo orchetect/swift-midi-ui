@@ -18,7 +18,8 @@ import SwiftUI
 ///     .environment(\.midiManager, midiManager)
 /// ```
 ///
-/// Optionally supply a tag to auto-update an input connection in MIDIManager.
+/// Optionally, auto-update an input connection in the `MIDIManager` when the selection changes by using
+/// the ``MIDIOutputsSelectable/updatingInputConnection(withTag:)`` view modifier.
 ///
 /// ```swift
 /// MIDIOutputsPicker( ... )
