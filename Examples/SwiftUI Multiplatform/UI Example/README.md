@@ -8,12 +8,17 @@
 
 ## Overview
 
-This example shows usage of the **swift-midi-ui** package target SwiftUI controls.
+This example shows usage of the **SwiftMIDIUI** package target SwiftUI controls.
 
 These bundled UI components provide easy-to-use implementations of endpoint selector lists and pickers.
 
 - Updates the UI in realtime to reflect changes in system endpoints.
-- Remembers selections between app launches.
+  > In SwiftUI, this happens automatically when you inject your `MIDIManager` instance into the environment:
+  >
+  > ```swift
+  > .environment(\.midiManager, midiManager)
+  > ```
+- Remembers selections between app launches, even for endpoints that have disappeared after being selected which are shown as temporarily "missing".
 - Shows visual feedback when a selection is an endpoint that is currently not present in the system, by displaying a caution symbol next to the list item. This selection will be fully restored when the endpoint reappears in the system.
 
 ## Future Development To-Do List

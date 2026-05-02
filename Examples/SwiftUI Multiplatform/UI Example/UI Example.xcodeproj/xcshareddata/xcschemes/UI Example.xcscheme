@@ -16,9 +16,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "E2F1FE6F29B2DF5800054467"
-               BuildableName = "UIExample.app"
-               BlueprintName = "UIExample"
-               ReferencedContainer = "container:UIExample.xcodeproj">
+               BuildableName = "UI Example.app"
+               BlueprintName = "UI Example"
+               ReferencedContainer = "container:UI Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,9 +46,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E2F1FE6F29B2DF5800054467"
-            BuildableName = "UIExample.app"
-            BlueprintName = "UIExample"
-            ReferencedContainer = "container:UIExample.xcodeproj">
+            BuildableName = "UI Example.app"
+            BlueprintName = "UI Example"
+            ReferencedContainer = "container:UI Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -63,9 +63,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "E2F1FE6F29B2DF5800054467"
-            BuildableName = "UIExample.app"
-            BlueprintName = "UIExample"
-            ReferencedContainer = "container:UIExample.xcodeproj">
+            BuildableName = "UI Example.app"
+            BlueprintName = "UI Example"
+            ReferencedContainer = "container:UI Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
