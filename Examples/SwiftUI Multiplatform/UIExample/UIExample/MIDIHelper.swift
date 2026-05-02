@@ -9,19 +9,19 @@ import SwiftUI
 
 /// Object responsible for managing MIDI services, managing connections, and sending/receiving events.
 ///
-/// Marking the class as `@Observable` allows us to install an instance of the class in a SwiftUI App or View
+/// Conforming the class to `ObservableObject` allows us to install an instance of the class in a SwiftUI App or View
 /// and propagate it through the environment.
 ///
 /// Properties that may result in UI changes are bound to `@MainActor` to ensure they are updated on the main thread.
-@Observable
-final class MIDIHelper: Sendable {
+final class MIDIHelper: ObservableObject, @unchecked Sendable {
     let midiManager = MIDIManager(
         clientName: "TestAppMIDIManager",
         model: "TestApp",
         manufacturer: "MyCompany"
     )
 
-    @MainActor private(set) var isVirtualEndpointsExist: Bool = false
+    @MainActor @Published
+    private(set) var isVirtualEndpointsExist: Bool = false
 
     init(start: Bool = false) {
         if start { self.start() }

@@ -8,7 +8,7 @@ import SwiftUI
 
 @main
 struct UIExampleApp: App {
-    @State var midiHelper = MIDIHelper(start: true)
+    @StateObject var midiHelper = MIDIHelper(start: true)
 
     var body: some Scene {
         WindowGroup {
@@ -18,6 +18,6 @@ struct UIExampleApp: App {
                 .frame(minHeight: 600)
                 #endif
         }
-        .environment(midiHelper)
+        .environmentObject(midiHelper)
     }
 }

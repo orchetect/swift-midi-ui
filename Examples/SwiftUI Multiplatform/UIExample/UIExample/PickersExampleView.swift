@@ -9,7 +9,7 @@ import SwiftMIDIUI
 import SwiftUI
 
 struct PickersExampleView: View {
-    @Environment(MIDIHelper.self) private var midiHelper
+    @EnvironmentObject private var midiHelper: MIDIHelper
 
     @AppStorage(MIDIHelper.PrefKeys.midiInID) private var midiInput: MIDIIdentifier?
     @AppStorage(MIDIHelper.PrefKeys.midiInName) private var midiInputName: String?
