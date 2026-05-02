@@ -41,16 +41,16 @@ jobs:
       # see https://github.com/actions/runner-images/issues/12758#issuecomment-3206748945
       run: xcodebuild -downloadPlatform iOS
 
-    - name: EndpointPickers - Resolve Package Dependencies # needed because sometimes xcodebuild fails otherwise
-      run: xcodebuild -project "Examples/SwiftUI Multiplatform/EndpointPickers/EndpointPickers.xcodeproj" -resolvePackageDependencies | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
-    - name: EndpointPickers - Build (iOS) # by targeting a simulator device, we bypass requiring a Developer Team ID
-      run: xcodebuild build -project "Examples/SwiftUI Multiplatform/EndpointPickers/EndpointPickers.xcodeproj" -scheme "EndpointPickers" -destination "generic/platform=iOS Simulator,name=Any iOS Simulator Device" | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
-    - name: EndpointPickers - Build (macOS)
-      run: xcodebuild build -project "Examples/SwiftUI Multiplatform/EndpointPickers/EndpointPickers.xcodeproj" -scheme "EndpointPickers" -destination "generic/platform=macOS" | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
+    - name: Endpoint Pickers - Resolve Package Dependencies # needed because sometimes xcodebuild fails otherwise
+      run: xcodebuild -project "Examples/SwiftUI Multiplatform/Endpoint Pickers/Endpoint Pickers.xcodeproj" -resolvePackageDependencies | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
+    - name: Endpoint Pickers - Build (iOS) # by targeting a simulator device, we bypass requiring a Developer Team ID
+      run: xcodebuild build -project "Examples/SwiftUI Multiplatform/Endpoint Pickers/Endpoint Pickers.xcodeproj" -scheme "Endpoint Pickers" -destination "generic/platform=iOS Simulator,name=Any iOS Simulator Device" | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
+    - name: Endpoint Pickers - Build (macOS)
+      run: xcodebuild build -project "Examples/SwiftUI Multiplatform/Endpoint Pickers/Endpoint Pickers.xcodeproj" -scheme "Endpoint Pickers" -destination "generic/platform=macOS" | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
 
-    - name: MIDIKitUIExample - Resolve Package Dependencies # needed because sometimes xcodebuild fails otherwise
-      run: xcodebuild -project "Examples/SwiftUI Multiplatform/UIExample/UIExample.xcodeproj" -resolvePackageDependencies | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
-    - name: MIDIKitUIExample - Build (iOS) # by targeting a simulator device, we bypass requiring a Developer Team ID
-      run: xcodebuild build -project "Examples/SwiftUI Multiplatform/UIExample/UIExample.xcodeproj" -scheme "UIExample" -destination "generic/platform=iOS Simulator,name=Any iOS Simulator Device" | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
-    - name: MIDIKitUIExample - Build (macOS)
-      run: xcodebuild build -project "Examples/SwiftUI Multiplatform/UIExample/UIExample.xcodeproj" -scheme "UIExample" -destination "generic/platform=macOS" | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
+    - name: UI Example - Resolve Package Dependencies # needed because sometimes xcodebuild fails otherwise
+      run: xcodebuild -project "Examples/SwiftUI Multiplatform/UI Example/UI Example.xcodeproj" -resolvePackageDependencies | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
+    - name: UI Example - Build (iOS) # by targeting a simulator device, we bypass requiring a Developer Team ID
+      run: xcodebuild build -project "Examples/SwiftUI Multiplatform/UI Example/UI Example.xcodeproj" -scheme "UI Example" -destination "generic/platform=iOS Simulator,name=Any iOS Simulator Device" | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
+    - name: UI Example - Build (macOS)
+      run: xcodebuild build -project "Examples/SwiftUI Multiplatform/UI Example/UI Example.xcodeproj" -scheme "UI Example" -destination "generic/platform=macOS" | xcbeautify --renderer github-actions && exit ${PIPESTATUS[0]}
