@@ -10,7 +10,7 @@ import SwiftMIDIIO
 import SwiftUI
 
 /// Protocol adopted by SwiftMIDIUI SwiftUI views that allow the user to select MIDI endpoints.
-@available(macOS 14.0, iOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol MIDIEndpointsSelectable where Self: View, Endpoint.ID == MIDIIdentifier {
     associatedtype Endpoint: MIDIEndpoint & Hashable & Identifiable
 
@@ -22,7 +22,7 @@ public protocol MIDIEndpointsSelectable where Self: View, Endpoint.ID == MIDIIde
     var ids: [MIDIIdentifier] { get set }
 }
 
-@available(macOS 14.0, iOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension MIDIEndpointsSelectable {
     /// Returns non-nil if properties require updating.
     func updatedID(endpoints: [Endpoint]) -> (id: MIDIIdentifier?, displayName: String?)? {

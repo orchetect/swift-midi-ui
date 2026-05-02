@@ -10,17 +10,14 @@ import SwiftMIDIIO
 import SwiftUI
 
 /// Protocol adopted by SwiftMIDIUI SwiftUI views that allow the user to select MIDI output endpoints.
-@available(macOS 14.0, iOS 17.0, *)
 public protocol MIDIOutputsSelectable {
     func updatingInputConnection(withTag tag: String?) -> Self
 }
 
-@available(macOS 14.0, iOS 17.0, *)
 protocol _MIDIOutputsSelectable: MIDIOutputsSelectable {
     var updatingInputConnectionWithTag: String? { get set }
 }
 
-@available(macOS 14.0, iOS 17.0, *)
 extension _MIDIOutputsSelectable {
     public func updatingInputConnection(withTag tag: String?) -> Self {
         var copy = self

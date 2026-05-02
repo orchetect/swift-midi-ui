@@ -25,7 +25,7 @@ import SwiftUI
 ///     .environment(\.midiManager, midiManager)
 ///     .updatingOutputConnection(withTag: "MyConnection")
 /// ```
-@available(macOS 14.0, iOS 17.0, *)
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 public struct MIDIInputsPicker: View, _MIDIInputsSelectable {
     @Environment(\.midiManager) private var midiManager
 

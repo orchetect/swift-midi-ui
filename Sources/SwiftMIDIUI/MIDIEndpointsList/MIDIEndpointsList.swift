@@ -12,7 +12,7 @@ import SwiftUI
 /// Internal generic MIDI endpoints SwiftUI list view that can be specialized for either inputs or outputs.
 ///
 /// This view requires that a **swift-midi-io** `MIDIManager` instance exists in the environment.
-@available(macOS 14.0, iOS 17.0, *)
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 struct MIDIEndpointsList<Endpoint: MIDIEndpoint & Hashable & Identifiable>: View, MIDIEndpointsSelectable
     where Endpoint.ID == MIDIIdentifier
 {
