@@ -14,4 +14,4 @@ import SwiftMIDIUI
 
 ## 2. Example Code
 
-See the **UIExample** example project for a demonstration of the available views. 
+See the [Examples](https://github.com/orchetect/swift-midi-ui/tree/main/Examples) folder for a demonstration of the available views.

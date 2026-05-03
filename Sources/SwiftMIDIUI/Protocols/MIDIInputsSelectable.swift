@@ -10,17 +10,21 @@ import SwiftMIDIIO
 import SwiftUI
 
 /// Protocol adopted by SwiftMIDIUI SwiftUI views that allow the user to select MIDI input endpoints.
-@available(macOS 14.0, iOS 17.0, *)
 public protocol MIDIInputsSelectable {
+    /// Automatically updates the MIDI output connection with the given tag (if it exists) in the `MIDIManager` in response
+    /// to endpoint selection changes in a MIDI endpoint list or picker.
+    ///
+    /// In order for this to occur, the `MIDIManager` instance must be injected into the ``SwiftUICore/EnvironmentValues/midiManager``
+    /// environment value. If it is not, then this view modifier has no effect and is the same as not using the view modifier.
+    ///
+    /// Supplying a `nil` tag simply bypasses the action and is the same as not using the view modifier.
     func updatingOutputConnection(withTag tag: String?) -> Self
 }
 
-@available(macOS 14.0, iOS 17.0, *)
 protocol _MIDIInputsSelectable: MIDIInputsSelectable {
     var updatingOutputConnectionWithTag: String? { get set }
 }
 
-@available(macOS 14.0, iOS 17.0, *)
 extension _MIDIInputsSelectable {
     public func updatingOutputConnection(withTag tag: String?) -> Self {
         var copy = self
@@ -31,7 +35,7 @@ extension _MIDIInputsSelectable {
     func updateOutputConnection(
         selectedUniqueID: MIDIIdentifier?,
         selectedDisplayName: String?,
-        midiManager: ObservableMIDIManager
+        midiManager: MIDIManager
     ) {
         guard let tag = updatingOutputConnectionWithTag,
               let midiOutputConnection = midiManager.managedOutputConnections[tag]

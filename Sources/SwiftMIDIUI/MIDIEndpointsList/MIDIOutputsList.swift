@@ -11,23 +11,24 @@ import SwiftUI
 
 /// SwiftUI `List` view for selecting MIDI output endpoints.
 ///
-/// This view requires that a **swift-midi-io** `ObservableMIDIManager` instance exists in the environment.
+/// This view requires that a **swift-midi-io** `MIDIManager` instance exists in the environment.
 ///
 /// ```swift
 /// MIDIOutputsList( ... )
-///     .environment(midiManager)
+///     .environment(\.midiManager, midiManager)
 /// ```
 ///
-/// Optionally supply a tag to auto-update an input connection in MIDIManager.
+/// Optionally, auto-update an input connection in the `MIDIManager` when the selection changes by using
+/// the ``MIDIOutputsSelectable/updatingInputConnection(withTag:)`` view modifier.
 ///
 /// ```swift
 /// MIDIOutputsList( ... )
-///     .environment(midiManager)
 ///     .updatingInputConnection(withTag: "MyConnection")
+///     .environment(\.midiManager, midiManager)
 /// ```
-@available(macOS 14.0, iOS 17.0, *)
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 public struct MIDIOutputsList: View, _MIDIOutputsSelectable {
-    @Environment(ObservableMIDIManager.self) private var midiManager
+    @Environment(\.midiManager) private var midiManager
 
     @Binding private var selectionID: MIDIIdentifier?
     @Binding private var selectionDisplayName: String?
@@ -35,6 +36,8 @@ public struct MIDIOutputsList: View, _MIDIOutputsSelectable {
     private var hideOwned: Bool
 
     var updatingInputConnectionWithTag: String?
+
+    @State private var endpoints: [MIDIOutputEndpoint] = []
 
     public init(
         selectionID: Binding<MIDIIdentifier?>,
@@ -50,15 +53,22 @@ public struct MIDIOutputsList: View, _MIDIOutputsSelectable {
 
     public var body: some View {
         MIDIEndpointsList<MIDIOutputEndpoint>(
-            endpoints: midiManager.endpoints.outputs,
+            endpoints: endpoints,
             maskedFilter: maskedFilter,
             selectionID: $selectionID,
             selectionDisplayName: $selectionDisplayName,
             showIcons: showIcons,
             midiManager: midiManager
         )
-        .onAppear {
-            updateInputConnection(id: selectionID)
+        .onAppear { // get initial system state
+            guard let midiManager else { return }
+            endpoints = midiManager.endpoints.outputs
+        }
+        .task { // update on changes to system state
+            guard let midiManager else { return }
+            for await endpoints in midiManager.endpointsStream() {
+                updateEndpoints(with: endpoints.outputs)
+            }
         }
         .onChange(of: selectionID) { newValue in
             updateInputConnection(id: newValue)
@@ -69,7 +79,13 @@ public struct MIDIOutputsList: View, _MIDIOutputsSelectable {
         hideOwned ? .drop(.owned()) : nil
     }
 
+    private func updateEndpoints(with newEndpoints: [MIDIOutputEndpoint]) {
+        guard endpoints != newEndpoints else { return }
+        endpoints = newEndpoints
+    }
+
     private func updateInputConnection(id: MIDIIdentifier?) {
+        guard let midiManager else { return }
         updateInputConnection(
             selectedUniqueID: id,
             selectedDisplayName: selectionDisplayName,

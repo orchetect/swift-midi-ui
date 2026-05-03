@@ -10,11 +10,13 @@ import SwiftMIDIIO
 import SwiftUI
 
 /// Internal generic MIDI endpoints SwiftUI list view that can be specialized for either inputs or outputs.
-@available(macOS 14.0, iOS 17.0, *)
-struct MIDIEndpointsList<Endpoint: MIDIEndpoint & Hashable & Identifiable>: View, MIDIEndpointsSelectable
+///
+/// This view requires that a **swift-midi-io** `MIDIManager` instance exists in the environment.
+@available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
+struct MIDIEndpointsList<Endpoint: MIDIEndpoint & Hashable & Identifiable>: View, _MIDIEndpointsSelectable
     where Endpoint.ID == MIDIIdentifier
 {
-    private weak var midiManager: ObservableMIDIManager?
+    @Environment(\.midiManager) var midiManager
 
     var endpoints: [Endpoint]
     var maskedFilter: MIDIEndpointMaskedFilter?
@@ -30,14 +32,13 @@ struct MIDIEndpointsList<Endpoint: MIDIEndpoint & Hashable & Identifiable>: View
         selectionID: Binding<MIDIIdentifier?>,
         selectionDisplayName: Binding<String?>,
         showIcons: Bool,
-        midiManager: ObservableMIDIManager?
+        midiManager: MIDIManager? // must supply this here since we can't access environment from the init
     ) {
         self.endpoints = endpoints
         self.maskedFilter = maskedFilter
         _selectionID = selectionID
         _selectionDisplayName = selectionDisplayName
         self.showIcons = showIcons
-        self.midiManager = midiManager
 
         // pre-populate IDs
         _ids = State(initialValue: generateIDs(endpoints: endpoints, maskedFilter: maskedFilter, midiManager: midiManager))
@@ -55,6 +56,7 @@ struct MIDIEndpointsList<Endpoint: MIDIEndpoint & Hashable & Identifiable>: View
             }
         }
         .onAppear {
+            checkForMIDIManager()
             updateID(endpoints: endpoints)
             ids = generateIDs(endpoints: endpoints, maskedFilter: maskedFilter, midiManager: midiManager)
         }

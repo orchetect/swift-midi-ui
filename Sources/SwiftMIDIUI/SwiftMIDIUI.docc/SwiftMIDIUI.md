@@ -21,6 +21,10 @@ SwiftMIDIUI adds convenient reusable user interface controls to simplify buildin
 - ``MIDIInputsPicker``
 - ``MIDIOutputsPicker``
 
+### SwiftUI Environment Values
+
+- ``SwiftUICore/EnvironmentValues/midiManager``
+
 ### UI Internals
 
 - <doc:Internals>

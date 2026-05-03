@@ -10,7 +10,7 @@ import SwiftMIDIIO
 import SwiftUI
 
 /// Protocol adopted by SwiftMIDIUI SwiftUI views that allow the user to select MIDI endpoints.
-@available(macOS 14.0, iOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol MIDIEndpointsSelectable where Self: View, Endpoint.ID == MIDIIdentifier {
     associatedtype Endpoint: MIDIEndpoint & Hashable & Identifiable
 
@@ -22,7 +22,7 @@ public protocol MIDIEndpointsSelectable where Self: View, Endpoint.ID == MIDIIde
     var ids: [MIDIIdentifier] { get set }
 }
 
-@available(macOS 14.0, iOS 17.0, *)
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension MIDIEndpointsSelectable {
     /// Returns non-nil if properties require updating.
     func updatedID(endpoints: [Endpoint]) -> (id: MIDIIdentifier?, displayName: String?)? {
@@ -46,7 +46,7 @@ extension MIDIEndpointsSelectable {
     func generateIDs(
         endpoints: [Endpoint],
         maskedFilter: MIDIEndpointMaskedFilter?,
-        midiManager: ObservableMIDIManager?
+        midiManager: MIDIManager?
     ) -> [MIDIIdentifier] {
         var endpointIDs: [MIDIIdentifier] = []
         if let maskedFilter, let midiManager {
@@ -67,6 +67,28 @@ extension MIDIEndpointsSelectable {
 
     func endpoint(for id: MIDIIdentifier) -> Endpoint? {
         endpoints.first(whereUniqueID: id)
+    }
+}
+
+// MARK: - _MIDIEndpointsSelectable
+
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+protocol _MIDIEndpointsSelectable: MIDIEndpointsSelectable {
+    var midiManager: MIDIManager? { get }
+}
+
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+extension _MIDIEndpointsSelectable {
+    /// Emits an error to the console if `MIDIManager` is missing from the SwiftUI environment.
+    /// This method is called from `onAppear { }` in all SwiftMIDIUI views that require the `MIDIManager`.
+    func checkForMIDIManager() {
+        if midiManager != nil { return }
+        
+        print("""
+            MIDIManager instance is missing from the SwiftUI environment. \
+            It must be assigned to the midiManager environment value in order for endpoint lists and pickers to update.
+            """
+        )
     }
 }
 
