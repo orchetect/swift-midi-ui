@@ -8,9 +8,9 @@ Extension for [SwiftMIDI](https://github.com/orchetect/swift-midi) adding reusab
 
 ## Compatibility
 
-| macOS | iOS  | visionOS | tvOS  | watchOS | Linux | Android | Windows |
-| :---: | :--: | :------: | :---: | :-----: | :---: | :-----: | :-----: |
-|   🟢   |  🟢   |    🟢     | ❌[^1] |  ❌[^1]  |   -   |    -    |    -    |
+| macOS | iOS  | visionOS | tvOS  | watchOS | Linux | Android | WASM | Windows |
+| :---: | :--: | :------: | :---: | :-----: | :---: | :-----: | :--: | :-----: |
+|   🟢   |  🟢   |    🟢     | ❌[^1] |  ❌[^1]  |   -   |    -    |  -   |    -    |
 
 [^1]: tvOS and watchOS do not have [Core MIDI I/O support](https://github.com/orchetect/swift-midi-io).
 
